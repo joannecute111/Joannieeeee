@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>SDIHS</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: violet;
+    padding: 10px;
+    text-align: center;
+    color: white;
+}
+
+.navbar {
+    background-color: purple;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.navbar li {
+    position: relative;
+}
+
+.navbar a {
+    display: block;
+    padding: 14px 16px;
+    color: white;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: violet;
+    color: black;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: purple;
+    min-width: 220px;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+}
+
+.dropdown-content a {
+    padding: 12px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.menu-btn {
+    display: none;
+    background-color: purple;
+    color: white;
+    padding: 14px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 30%;
+    background: pink;
+    padding: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.sidebar a:hover {
+    background: red;
+}
+
+article {
+    width: 70%;
+    padding: 20px;
+    background: #f1f1f1;
+    min-height: 300px;
+}
+
+footer {
+    background-color: violet;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+@media (max-width: 768px) {
+    .menu-btn {
+        display: block;
+    }
+
+    .navbar ul {
+        display: none;
+        flex-direction: column;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: none;
+    }
+
+    .dropdown-content {
+        position: static;
+    }
+
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar, article {
+        width: 100%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h2>SDIHS</h2>
+    <h3>Santo Domingo Integrated High School</h3>
+</header>
+
+<div class="menu-btn" onclick="toggleMenu()">☰ Menu</div>
+
+<nav class="navbar">
+<ul id="navMenu">
+    <li><a href="#" onclick="loadHome()">Home</a></li>
+
+    <li class="dropdown">
+        <a href="#">Activities</a>
+        <div class="dropdown-content">
+            <a href="#" onclick="loadActivities(1)">Activity 1</a>
+            <a href="#" onclick="loadActivities(2)">Activity 2</a>
+            <a href="#" onclick="loadActivities(3)">Activity 3</a>
+        </div>
+    </li>
+
+    <li class="dropdown">
+        <a href="#">Assessment</a>
+        <div class="dropdown-content">
+            <a href="#" onclick="loadAssessment('written')">Written Assessment</a>
+            <a href="#" onclick="loadAssessment('quiz')">Quiz</a>
+            <a href="#" onclick="loadAssessment('reflection')">Reflection</a>
+        </div>
+    </li>
+
+    <li class="dropdown">
+        <a href="#">Performance Task</a>
+        <div class="dropdown-content">
+            <a href="#" onclick="loadPerformance('overview')">Task Overview</a>
+            <a href="#" onclick="loadPerformance('rubric')">Rubric</a>
+            <a href="#" onclick="loadPerformance('output')">Output</a>
+        </div>
+    </li>
+
+    <li class="dropdown">
+        <a href="#">About</a>
+        <div class="dropdown-content">
+            <a href="#" onclick="loadAbout()">Group Members</a>
+        </div>
+    </li>
+</ul>
+</nav>
+
+<section>
+<div class="container">
+
+<nav class="sidebar">
+<ul>
+    <li><a href="#" onclick="loadSide('content')">Content</a></li>
+    <li><a href="#" onclick="loadSide('perstandard')">Performance Standard</a></li>
+    <li><a href="#" onclick="loadSide('constandard')">Content Standard</a></li>
+    <li><a href="#" onclick="loadSide('learningcom')">Learning Competencies</a></li>
+    <li><a href="#" onclick="loadSide('objectives')">Objectives</a></li>
+</ul>
+</nav>
+
+<article id="content">
+    <h2>Welcome To Our Website!</h2>
+    <p>This website is used for our 7th grade learners in order to show them the qualities and skills of a succesful entrepreneur and show how they can also apply it.</p>
+</article>
+
+</div>
+</section>
+
+<footer>
+    <p>© 2025 SDIHS</p>
+</footer>
+
+<script>
+function toggleMenu() {
+    const nav = document.getElementById("navMenu");
+    nav.style.display = nav.style.display === "flex" ? "none" : "flex";
+}
+
+/* HOME */
+function loadHome() {
+    document.getElementById("content").innerHTML = `
+    <h2>Mission</h2>
+    <p>To protect and promote the right of every Filipino to quality, equitable, culture-based, and complete basic education.</p><br>
+
+    <h2>Vision</h2>
+    <p>We dream of Filipinos who passionately love their country and whose values and competencies enable them to realize their full potential.</p><br>
+
+    <h2>Core Values</h2>
+    <p>Maka-Diyos<br>Maka-tao<br>Makakalikasan<br>Makabansa</p>
+    `;
+}
+
+/* ACTIVITIES */
+function loadActivities(num) {
+    const c = document.getElementById("content");
+    if (num === 1)
+        c.innerHTML = "<h2>Activity 1</h2><p>Research a famous ICT entrepreneur and describe their qualities, challenges, and contributions.</p>";
+    if (num === 2)
+        c.innerHTML = "<h2>Activity 2</h2><p>Create a simple ICT-based product or service and identify your target customers.</p>";
+    if (num === 3)
+        c.innerHTML = "<h2>Activity 3</h2><p>Evaluate yourself by identifying which entrepreneurial qualities you already possess.</p>";
+}
+
+/* ASSESSMENT */
+function loadAssessment(type) {
+    const c = document.getElementById("content");
+
+    if (type === "written")
+        c.innerHTML = `
+        <h2>Written Assessment</h2>
+        <p>Answer the following questions in paragraph form:</p>
+        <ol>
+            <li>Why are innovation and creativity important in ICT entrepreneurship?</li>
+            <li>How do resilience and risk-taking help entrepreneurs succeed?</li>
+            <li>Choose one ICT entrepreneur and explain why they inspire you.</li>
+        </ol>`;
+
+    if (type === "quiz")
+        c.innerHTML = `
+        <h2>Quiz</h2>
+        <ol>
+            <li>Who is the co-founder of Microsoft?</li>
+            <li>Which entrepreneur introduced the Windows operating system?</li>
+            <li>Who co-founded Apple Inc.?</li>
+            <li>What year was the Macintosh introduced?</li>
+            <li>Which Filipino entrepreneur developed the local bus concept?</li>
+            <li>Who founded Converge ICT Solutions?</li>
+            <li>Which industry does Winston Damarillo focus on?</li>
+            <li>What quality refers to the ability to recover from failure?</li>
+            <li>Why is being tech-savvy important for ICT entrepreneurs?</li>
+            <li>What quality helps entrepreneurs lead and inspire others?</li>
+        </ol>`;
+
+    if (type === "reflection")
+        c.innerHTML = `
+        <h2>Reflection</h2>
+        <p>Reflect on what you learned about ICT entrepreneurs and identify which qualities you want to improve.</p>`;
+}
+
+/* PERFORMANCE TASK */
+function loadPerformance(type) {
+    const c = document.getElementById("content");
+
+    if (type === "overview")
+        c.innerHTML = `
+        <h2>Task Overview</h2>
+        <p>Create a simple ICT business plan that demonstrates entrepreneurial qualities such as creativity, innovation, and problem-solving.</p>`;
+
+    if (type === "rubric")
+        c.innerHTML = `
+        <h2>Rubric</h2>
+        <ul>
+            <li>Creativity and innovation</li>
+            <li>Practicality and feasibility</li>
+            <li>Clarity of ideas and presentation</li>
+        </ul>`;
+
+    if (type === "output")
+        c.innerHTML = `
+        <h2>Output</h2>
+        <p>Submit a written business plan, poster, or digital presentation.</p>`;
+}
+
+/* ABOUT */
+function loadAbout() {
+    document.getElementById("content").innerHTML = `
+    <h2>Group Members</h2>
+    <ul>
+        <li>Garcia, Sebastein</li>
+        <li>Enriquez, Stefhanie</li>
+        <li>Bicalan, Ayessa</li>
+        <li>De Leon, Joanne</li>
+        <li>Dua, Pat</li>
+    </ul>`;
+}
+
+/* SIDEBAR */
+function loadSide(type) {
+    const c = document.getElementById("content");
+
+    if (type === "content") {
+        c.innerHTML = `
+        <h2 style="text-align:center;">Tech Leaders Global Impact and ICT Entrepreneur Qualities</h2>
+
+        <p><strong>Bill Gates</strong>, also known as William Henry Gates III, was born in 1955. He is the American co-founder of Microsoft and played a revolutionary role in developing the Windows operating system. He is a philanthropist focusing on global health, education, and poverty alleviation.</p><br>
+
+        <p><strong>Steve Jobs</strong>, born in 1955, was the American co-founder of Apple Inc. His creativity led to the invention of the <strong>Macintosh in 1984</strong>, the first computer with a GUI. He was also instrumental in Pixar and Toy Story.</p><br>
+
+        <p><strong>Dado Banatao</strong>, born in 1946, is a Filipino entrepreneur who developed the local bus concept and improved computer performance worldwide.</p><br>
+
+        <p><strong>Dennis Anthony H. Uy</strong>, born in 1966, founded Converge ICT Solutions. In 2023, he was appointed special envoy for digital transformation.</p><br>
+
+        <p><strong>Winston Damarillo</strong>, a Filipino entrepreneur, focuses on financial technology through Talino Venture Lab and BayaniPay.</p><br>
+
+        <h2>Qualities of ICT Entrepreneurs</h2>
+        <ol>
+            <li>Innovative</li>
+            <li>Risk-taker and resilient</li>
+            <li>Tech-savvy and adaptable</li>
+            <li>Creative and critical thinker</li>
+            <li>Problem solver</li>
+            <li>Visionary leader</li>
+            <li>Confident, focused, and determined</li>
+        </ol>`;
+    }
+
+    if (type === "perstandard") {
+        c.innerHTML = `
+        <h2>Performance Standard</h2>
+        <p>The learner demonstrates the ability to apply ICT entrepreneurial qualities in practical situations.</p>
+        <p>This includes analyzing real-life entrepreneurs, proposing solutions, and presenting ideas clearly and confidently.</p>`;
+    }
+
+    if (type === "constandard") {
+        c.innerHTML = `
+        <h2>Content Standard</h2>
+        <p>The learner demonstrates understanding of ICT entrepreneurship and the roles of entrepreneurs in society.</p>
+        <p>This covers innovation, leadership, digital transformation, and responsible use of technology.</p>`;
+    }
+
+    if (type === "learningcom") {
+        c.innerHTML = `
+        <h2>Learning Competencies</h2>
+        <p>At the end of the lesson, the learner should be able to:</p>
+        <ul>
+            <li>Identify qualities of successful ICT entrepreneurs</li>
+            <li>Explain the contributions of global and Filipino tech leaders</li>
+            <li>Apply entrepreneurial thinking to ICT-based problems</li>
+        </ul>`;
+    }
+
+    if (type === "objectives") {
+        c.innerHTML = `
+        <h2>Objectives</h2>
+        <p>By the end of the lesson, students should be able to:</p>
+        <ul>
+            <li>Describe the qualities of ICT entrepreneurs</li>
+            <li>Appreciate the impact of technology leaders</li>
+            <li>Develop confidence, creativity, and critical thinking</li>
+        </ul>`;
+    }
+}
+</script>
+
+</body>
+</html>
